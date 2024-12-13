@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "683211989560",
+    "project_id": "messageapp-b1625",
+    "storage_bucket": "messageapp-b1625.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683211989560:android:7f5c084b123683b27ffccd",
+        "android_client_info": {
+          "package_name": "com.waiyan.messageapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1RmFCMSKk1GbQxG4phZ56rrsGtEAHswQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
