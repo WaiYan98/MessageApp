@@ -2,12 +2,11 @@ package com.waiyan.messageapp
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
-import androidx.compose.ui.window.ComposeViewport
+import com.waiyan.messageapp.screens.AuthenticationScreen
+import com.waiyan.messageapp.screens.MessageApp
 import dev.gitlive.firebase.Firebase
-import dev.gitlive.firebase.FirebaseApp
 import dev.gitlive.firebase.FirebaseOptions
 import dev.gitlive.firebase.initialize
-import kotlinx.browser.document
 import org.jetbrains.skiko.wasm.onWasmReady
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -22,7 +21,7 @@ fun main() {
                     projectId = "messageapp-b1625"
                 )
             )
-            Login()
+            MessageApp()
         }
     }
 }
