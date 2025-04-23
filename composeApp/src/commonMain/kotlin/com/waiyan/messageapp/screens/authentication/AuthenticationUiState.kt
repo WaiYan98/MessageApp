@@ -1,4 +1,4 @@
-package com.waiyan.messageapp.screens
+package com.waiyan.messageapp.screens.authentication
 
 import dev.gitlive.firebase.auth.FirebaseUser
 

@@ -1,10 +1,9 @@
-package com.waiyan.messageapp.screens
+package com.waiyan.messageapp.screens.authentication
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.waiyan.messageapp.remote.AuthenticationService
 import dev.gitlive.firebase.auth.FirebaseAuthUserCollisionException
-import dev.gitlive.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

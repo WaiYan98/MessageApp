@@ -1,4 +1,4 @@
-package com.waiyan.messageapp.screens
+package com.waiyan.messageapp.screens.authentication
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,18 +33,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.waiyan.messageapp.dispatchers.dispatcherIO
+import com.waiyan.messageapp.remote.AuthenticationService
 import com.waiyan.messageapp.remote.AuthenticationServiceImpl
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.auth
+import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun AuthenticationScreen(
-    goToMessageScreen: () -> Unit
+    viewModel: AuthenticationViewModel = koinViewModel(),
+    goToMessageScreen: (userId: String) -> Unit
 ) {
 
-    val authenticationService = AuthenticationServiceImpl(Firebase.auth)
-    val viewModel: AuthenticationViewModel =
-        viewModel { AuthenticationViewModel(authenticationService) }
     var email: String by remember { mutableStateOf("") }
     var password: String by remember { mutableStateOf("") }
 
@@ -52,12 +54,14 @@ fun AuthenticationScreen(
 
     LaunchedEffect(key1 = uiState.success) {
         if (uiState.success != null) {
-            goToMessageScreen()
+            uiState.success?.let {
+                goToMessageScreen(it.uid)
+            }
         }
     }
 
     if (uiState.isLoading) {
-       ShowLoading()
+        ShowLoading()
     }
 
     if (uiState.onError != null) {

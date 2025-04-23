@@ -2,7 +2,7 @@ package com.waiyan.messageapp
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
-import com.waiyan.messageapp.screens.AuthenticationScreen
+import com.waiyan.messageapp.di.initKoin
 import com.waiyan.messageapp.screens.MessageApp
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.FirebaseOptions
@@ -11,7 +11,7 @@ import org.jetbrains.skiko.wasm.onWasmReady
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-
+    initKoin()
     onWasmReady {
         CanvasBasedWindow(title = "MessageApp") {
             Firebase.initialize(

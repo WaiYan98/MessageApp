@@ -1,10 +1,15 @@
 package com.waiyan.messageapp
 
+import android.app.Application
+import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.google.firebase.FirebasePlatform
-import com.waiyan.messageapp.screens.AuthenticationScreen
+import com.waiyan.messageapp.screens.MessageApp
+import com.waiyan.messageapp.screens.authentication.AuthenticationScreen
+import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.FirebaseOptions
+import dev.gitlive.firebase.initialize
 
 fun main() = application {
 
@@ -39,6 +44,11 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "MessageApp",
     ) {
-        AuthenticationScreen()
+
+        Firebase.initialize(
+            Application(),
+            options = option
+        )
+        MessageApp()
     }
 }

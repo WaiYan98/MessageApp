@@ -1,43 +1,44 @@
 package com.waiyan.messageapp.screens
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavGraph
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavGraphNavigator
-import androidx.navigation.NavHost
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.waiyan.messageapp.dispatchers.dispatcherIO
+import com.waiyan.messageapp.remote.AuthenticationServiceImpl
+import com.waiyan.messageapp.remote.MessageServiceImpl
+import com.waiyan.messageapp.screens.authentication.AuthenticationScreen
+import com.waiyan.messageapp.screens.message.MessageScreen
+import com.waiyan.messageapp.screens.message.MessageViewModel
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.auth
+import dev.gitlive.firebase.database.database
+import kotlinx.serialization.Serializable
 
-enum class Route(title: String) {
-    LoginScreen("login_screen"),
-    MessageScreen("message_screen")
-
-}
+@Serializable
+data object LoginScreen
+@Serializable
+data class MessageScreen(val userId: String? = null)
 
 @Composable
 fun MessageApp() {
     val navController = rememberNavController()
 
-
     NavHost(
         navController = navController,
-        startDestination = Route.LoginScreen.name
+        startDestination = LoginScreen
     ) {
-        composable(route = Route.LoginScreen.name) {
-            AuthenticationScreen {
-                navController.navigate(Route.MessageScreen.name)
+        composable<LoginScreen> {
+            AuthenticationScreen { userId ->
+                navController.navigate(MessageScreen(userId))
             }
         }
 
-        composable(route = Route.MessageScreen.name) {
+        composable<MessageScreen> { navBackStack ->
+            val uid = navBackStack.toRoute<MessageScreen>().userId
+            println("UserIdDelivery -> $uid")
             MessageScreen()
         }
     }
